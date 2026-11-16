@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#141018">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Podmianka — podmiana twarzy na zdjęciu, liczona w przeglądarce na telefonie.">
+<meta name="description" content="Podmianka — wstaw siebie w inne zdjęcie. Cała osoba, nie sama twarz.">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Podmianka">
@@ -21,15 +21,16 @@
   <header>
     <div class="brand">
       <h1>Podmianka</h1>
-      <p class="sub">Twoja twarz, inne zdjęcie. Liczy się tutaj, na telefonie.</p>
+      <p class="sub">Cała Ty albo cały Ty na innym zdjęciu. Nie miks twarzy.</p>
     </div>
   </header>
   <main>
     <section class="card">
-      <p class="label">Twoja twarz</p>
-      <button type="button" class="pick" id="pick-source">Wybierz zdjęcie</button>
+      <p class="label">Twoje zdjęcie</p>
+      <button type="button" class="pick" id="pick-source">Wybierz siebie</button>
       <input id="file-source" type="file" accept="image/*" hidden>
-      <img id="preview-source" alt="" hidden>
+      <img id="preview-source" alt="Twoje zdjęcie" hidden>
+      <p class="hint">Twarz, włosy, sylwetka i ubranie bierzemy z tego zdjęcia.</p>
     </section>
 
     <div class="tabs" role="tablist" aria-label="Tryb">
@@ -38,19 +39,18 @@
     </div>
 
     <section class="card" id="panel-photo" role="tabpanel">
-      <p class="label">Zdjęcie albo krótki film</p>
-      <button type="button" class="pick" id="pick-target">Wybierz zdjęcie lub film</button>
-      <input id="file-target" type="file" accept="image/*,video/*" hidden>
-      <img id="preview-target" alt="" hidden>
-      <p id="target-name" class="hint" hidden></p>
-      <p class="hint">Film jest próbny: pierwsze 4 sekundy, 480p, kilka klatek na sekundę. Potrafi długo trwać.</p>
+      <p class="label">Zdjęcie z inną osobą</p>
+      <button type="button" class="pick" id="pick-target">Wybierz zdjęcie</button>
+      <input id="file-target" type="file" accept="image/*" hidden>
+      <img id="preview-target" alt="Zdjęcie docelowe" hidden>
+      <p class="hint">Zostaje poza, kadr, tło i światło. Osoba jest podmieniana w całości. Film na razie nie, bo darmowe modele wideo nie wstają.</p>
       <button type="button" class="go" id="btn-swap">Podmień</button>
     </section>
 
     <section class="card" id="panel-text" role="tabpanel" hidden>
-      <label class="label" for="prompt">Opis obrazu</label>
-      <textarea id="prompt" rows="3" maxlength="400" placeholder="np. astronauta na plaży o zachodzie słońca"></textarea>
-      <p class="hint">Dopisujemy, żeby na obrazie była jedna osoba, przodem, jak na zdjęciu. Potem wstawiamy Twoją twarz.</p>
+      <label class="label" for="prompt">Gdzie masz się znaleźć</label>
+      <textarea id="prompt" rows="3" maxlength="400" placeholder="np. na plaży o zachodzie, w płaszczu przeciwdeszczowym"></textarea>
+      <p class="hint">Scena z opisu, a osoba z Twojego zdjęcia.</p>
       <button type="button" class="go" id="btn-create">Stwórz</button>
     </section>
 
@@ -61,19 +61,18 @@
     </section>
 
     <section class="card" id="result-card" hidden>
-      <p class="label" id="result-label">Wynik</p>
+      <p class="label">Wynik</p>
       <img id="result-image" alt="Wynik podmiany" hidden>
-      <video id="result-video" controls playsinline hidden></video>
       <p id="result-note" class="hint"></p>
       <button type="button" class="go" id="btn-save">Zapisz</button>
-      <p class="hint">Na iPhonie „Zapisz” otwiera udostępnianie — stamtąd da się dodać obraz do Zdjęć. Można też przytrzymać obraz.</p>
+      <p class="hint">Na iPhonie „Zapisz” otwiera udostępnianie i stamtąd da się dodać obraz do Zdjęć. Można też przytrzymać obraz.</p>
     </section>
 
     <p id="error" class="error" hidden></p>
   </main>
   <footer>
-    <p>Używaj tylko swojej twarzy albo za zgodą osoby ze zdjęcia. Nie rób z tego krzywdy.</p>
-    <p>Pipeline według <a href="https://github.com/facefusion/facefusion">FaceFusion</a> (Henry Ruhs, OpenRAIL-AS). Modele InsightFace: SCRFD, ArcFace i INSwapper — tylko niekomercyjnie, pobierane z Hugging Face, nie z tego repozytorium. Obraz z tekstu: Pollinations.</p>
+    <p>Tylko własne zdjęcie albo za zgodą osoby na zdjęciu.</p>
+    <p>Liczy się na darmowej karcie Hugging Face (ZeroGPU, bez klucza, krótki dzienny limit), nie w telefonie. Model: <a href="https://huggingface.co/spaces/AiArtLab/zen-image-edit-demo">zen-image-edit</a> (AiArtLab, na bazie Qwen-Image, licencja badawcza Qwen). Zapasowo <a href="https://huggingface.co/spaces/Qwen/Qwen-Image-Edit-2509">Qwen-Image-Edit-2509</a>.</p>
   </footer>
 </div>
 <script type="module" src="app.js"></script>
